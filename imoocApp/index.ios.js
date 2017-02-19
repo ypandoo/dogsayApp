@@ -16,7 +16,8 @@ import {
 
 import List from './app/creation/index'
 import Edit from './app/edit/index'
-import Account from './app/account/index'
+import Account from './app/account'
+import Login from './app/account/login'
 
 class imoocApp extends React.Component {
   static title = '<TabBarIOS>';
@@ -27,6 +28,7 @@ class imoocApp extends React.Component {
     selectedTab: 'list',
     notifCount: 0,
     presses: 0,
+    logged: false
   };
 
   _renderContent = (color: string, pageText: string, num?: number) => {
@@ -38,7 +40,18 @@ class imoocApp extends React.Component {
     );
   };
 
+  _logged(){
+    this.setState({logged:true})
+  }
+
   render() {
+    if(this.state.logged == false)
+    {
+      return (
+        <Login logged={this._logged.bind(this)}></Login>
+      )
+    }
+
     return (
       <TabBarIOS
         unselectedTintColor="grey"
